@@ -64,6 +64,11 @@ class EnhanceEchoTask(BaseWWTask, FindFeature):
             enhance = self.find_echo_enhance()
             if not enhance:
                 raise Exception('必须在背包声骸界面过滤后开始!')
+            # 强化后背包仍选中已强化的声骸，重新选择第一格中的未强化堆叠。
+            self.click_relative(0.15, 0.20, after_sleep=0.5)
+            enhance = self.find_echo_enhance()
+            if not enhance:
+                raise Exception('选择背包第一位声骸后找不到培养按钮!')
             current_level = self.is_0_level()
             if not current_level:
                 total = self.info_get('成功声骸数量') + self.info_get('失败声骸数量')
